@@ -1,9 +1,5 @@
 ---
-- include: Debian.yml
-  when: ansible_os_family == 'Debian'
-
-- include: RedHat.yml
-  when: ansible_os_family == 'RedHat'
+- include: compat.yml
 
 - include_vars: "{{item}}"
   with_first_found:
@@ -11,6 +7,15 @@
   - "../vars/{{ansible_distribution}}.yml"
   - "../vars/{{ansible_os_family}}.yml"
   - "../vars/default.yml"
+
+- include: Ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
 
 - name: install lz4 with default package manager
   action: "{{backcompat_pkg_mgr}} name={{lz4_package_name}}"
