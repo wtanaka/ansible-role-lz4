@@ -12,15 +12,4 @@
 - include: RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- name: install lz4 with default package manager
-  action: "{{backcompat_pkg_mgr}} name={{lz4_package_name}}"
-  sudo: yes
-  when: backcompat_pkg_mgr == "yum" or backcompat_pkg_mgr == "apt"
-
-# Use "command" since dnf was only added as a module in ansible 1.9.0
-- name: install lz4 with dnf
-  command: dnf install -y {{lz4_package_name}}
-  args:
-    creates: /usr/bin/lz4
-  sudo: yes
-  when: backcompat_pkg_mgr == "dnf"
+- include: install_package_names.yml

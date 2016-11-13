@@ -1,2 +1,3 @@
 ---
-lz4_package_name: liblz4-tool
+package_names:
+- liblz4-tool

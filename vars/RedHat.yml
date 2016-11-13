@@ -1,2 +1,3 @@
 ---
-lz4_package_name: lz4
+package_names:
+- lz4
